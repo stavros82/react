@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -33,6 +36,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: todo-app/dist
+          publish_dir: ./todo-app/dist
           publish_branch: gh-pages
           keep_files: false
+          clean: true
+          commit_message: 'Deploy site to GitHub Pages'
